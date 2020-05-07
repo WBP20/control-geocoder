@@ -51,10 +51,10 @@ class LocateGeocoder(MacroElement):
         {% endmacro %}
         """)
 
-    def __init__(self, collapsed=True, expand="touch",position="topright", placeholder="Search...",errorMessage="Nothing found",iconLabel="Initiate a new search", geocoder= new L.Control.Geocoder.Nominatim(), showUniqueResult=True, showResultIcons=False, suggestMinLength=3, suggestTimeout=250, query="", queryMinLength=1, defaultMarkGeocode=True, **kwargs):
+    def __init__(self, **kwargs):
         super(LocateGeocoder, self).__init__()
         self._name = 'LocateGeocoder'
-        self.options = parse_options(collapsed=collapsed, expand=expand,position=position, placeholder=placeholder,errorMessage=errorMessage,iconLabel=iconLabel, geocoder=geocoder, showUniqueResult=showUniqueResult, showResultIcons=showResultIcons, suggestMinLength=suggestMinLength, suggestTimeout=suggestTimeout, query=query, queryMinLength=queryMinLength, defaultMarkGeocode=defaultMarkGeocode, **kwargs)
+        
 
     def render(self, **kwargs):
         super(LocateGeocoder, self).render(**kwargs)
