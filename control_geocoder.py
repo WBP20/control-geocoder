@@ -47,14 +47,18 @@ class LocateGeocoder(MacroElement):
 
     _template = Template(u"""
         {% macro script(this, kwargs) %}
-            L.Control.geocoder().addTo({{this._parent.get_name()}});
+            L.Control.geocoder({{this.options|tojson }}).on('markgeocode', function(e) { 
+         {{this._parent.get_name()}}.setView(e.geocode.center, 11
+       ); }).addTo({{this._parent.get_name()}});
+
         {% endmacro %}
         """)
 
-    def __init__(self, **kwargs):
+    def __init__(self, collapsed=True, expand="touch", position="topright", placeholder="Search...", errorMessage="Nothing found", iconLabel="Initiate a new search", showUniqueResult=True, showResultIcons=False, suggestMinLength=3, suggestTimeout=250, query="", queryMinLength=1, defaultMarkGeocode=True, **kwargs):
         super(LocateGeocoder, self).__init__()
         self._name = 'LocateGeocoder'
-        
+        self.options = parse_options(collapsed=collapsed, expand=expand,position=position, placeholder=placeholder,errorMessage=errorMessage,iconLabel=iconLabel, showUniqueResult=showUniqueResult, showResultIcons=showResultIcons, suggestMinLength=suggestMinLength, suggestTimeout=suggestTimeout, query=query, queryMinLength=queryMinLength, defaultMarkGeocode=defaultMarkGeocode, **kwargs)
+    
 
     def render(self, **kwargs):
         super(LocateGeocoder, self).render(**kwargs)
